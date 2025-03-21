@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑笔记</title>
+    <style>
+        body {
+            background-image: url('{{ url_for('static', filename='wallpaper.jpg') }}');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        a {
+            color: blue; /* 正常状态下链接颜色 */
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: red; /* 鼠标悬停时链接颜色 */
+        }
+    </style>
+</head>
+
+<body>
+    <h1>编辑笔记</h1>
+    <form method="post">
+        <label for="title">标题：</label>
+        <input type="text" id="title" name="title" value="{{ note.title }}" required><br>
+        <label for="content">内容：</label>
+        <textarea id="content" name="content" required>{{ note.content }}</textarea><br>
+        <input type="submit" value="保存">
+    </form>
+    <a href="{{ url_for('index') }}">返回笔记列表</a>
+    <script src="https://cdn.jsdelivr.net/npm/ripplejs@1.0.2/dist/ripple.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const elements = document.querySelectorAll('body');
+            elements.forEach(function (element) {
+                new Ripple(element);
+            });
+        });
+    </script>
+    <script>
+    particlesJS.load('particles-js', '{{ url_for('static', filename='particles.json') }}',function () {
+        console.log('particles.js loaded - callback');
+    });
+    </script>
+    <div id="particles-js" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
+</body>
+
+</html>
